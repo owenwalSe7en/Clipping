@@ -2,9 +2,11 @@
 
 ## Executive Summary
 
-**OpusClip costs $29/month.** At 500+ videos/month, you're paying $0.058/video. A self-hosted alternative pays back its development cost in 12-18 months, then saves $230-500/month perpetually.
+**OpusClip costs $29/month = 3,600 annual credits (300 credits/month, 1 credit = 1 minute video).**
 
-**This document:** Technical blueprint for replacing OpusClip with Claude Code + open-source models.
+**CRITICAL UPDATE (June 2026):** OpusClip's actual cost structure is completely different from initially analyzed. The $29/month plan comes with real processing capacity limits, making it MUCH more economical than a fixed per-video cost model for volumes under 300 clips/month.
+
+**This document:** Updated analysis of OpusClip vs. DIY, with revised recommendations based on actual pricing structure.
 
 ---
 
@@ -60,49 +62,134 @@
 
 ---
 
-## Cost-Benefit: OpusClip vs. DIY
+## Cost-Benefit: OpusClip vs. DIY (REVISED ANALYSIS)
 
-### Monthly Costs
+### OpusClip Pro: $29/month = 3,600 Credits/Year
 
-**OpusClip Pro: $29/month (flat fee)**
-- 100 videos/month: $0.29 per video
-- 500 videos/month: $0.058 per video
-- 1,000 videos/month: $0.029 per video
+**Structure:** 300 credits/month where 1 credit = 1 minute of video processing
 
-**DIY Stack (at 500 videos/month):**
-| Component | Cost | Notes |
-|-----------|------|-------|
-| Whisper (Hugging Face API) | $0 | Or $50/month cloud GPU |
-| PySceneDetect | $0 | Free, open-source |
-| Claude API (moment analysis) | $0.05 | Haiku model, batch discount |
-| FFmpeg | $0 | Free, local GPU |
-| Submagic captions | $0.10 | Already in stack |
-| Infrastructure (amortized) | $0.02 | Cloud GPU every 3rd day |
-| **Total** | **$0.17** | **vs. $0.058 (OpusClip)** |
+**Cost per clip generated (OpusClip only, no captions):**
 
-**Wait—DIY is more expensive?**
+| Clips per 60-min Source | Cost per Clip | Notes |
+|-------------------------|---------------|-------|
+| 10 clips | $0.97/clip | Very conservative extraction |
+| 15 clips | $0.65/clip | Moderate extraction (OpusClip typical) |
+| 20 clips | $0.49/clip | Aggressive extraction |
+| 50 clips | $0.20/clip | Maximum extraction |
 
-Only because we're paying for quality captions. If you skip captions:
-- DIY: $0.07/video
-- OpusClip: $0.058/video
+**Real monthly costs at different volumes:**
 
-**But OpusClip doesn't include captions.** You need Submagic anyway ($49/mo).
+| Monthly Clip Target | Monthly Cost | Cost per Clip | Capacity Used |
+|-------------------|-------------|---------------|--------------|
+| 50 clips | $29 | $0.58/clip | 167 min (55%) |
+| 100 clips | $29 | $0.29/clip | 333 min (111%) = overages |
+| 200 clips | $50-75 | $0.25-0.38/clip | Tier upgrade |
+| 300 clips | $29 | $0.10/clip | 300 min (100%) = capacity match |
+| 600 clips | $100-150 | $0.17-0.25/clip | Multiple tiers |
 
-**Real comparison:**
+**Key insight:** OpusClip is extremely cheap up to 300 clips/month (fits in 300-minute allocation)
+
+### DIY Stack (at 100, 300, and 600 clips/month)
+
+| Component | Cost | Per-Clip Cost (100) | Per-Clip Cost (300) | Per-Clip Cost (600) |
+|-----------|------|-------------------|-------------------|-------------------|
+| Claude API | ~$5-15/mo | $0.05-0.15 | $0.02-0.05 | $0.01-0.03 |
+| Whisper/PyScene | $0 | $0 | $0 | $0 |
+| Submagic captions | $49/mo | $0.49 | $0.16 | $0.08 |
+| Infrastructure | $20-50/mo | $0.20-0.50 | $0.07-0.17 | $0.03-0.08 |
+| **Total monthly** | **$74-114/mo** | **$0.74-1.14** | **$0.25-0.38** | **$0.12-0.19** |
+
+### Direct Comparison by Volume
+
+**At 100 clips/month:**
 ```
-OpusClip + Submagic:
-├── OpusClip: $29/mo = $0.058/video (500 videos/month)
-├── Submagic: $49/mo = $0.098/video
-└── Total: $78/mo = $0.156/video
+OpusClip Pro alone:
+├── Cost: $29/month
+├── Per-clip: $0.29
+├── Setup time: 5 min
+└── Development: 0 hours
 
-DIY (Claude + PyScene + Whisper + Submagic):
-├── Claude API: $0.05
-├── Whisper/PyScene: $0
-├── Submagic: $0.098
-└── Total: $0.148/video
+DIY (Claude + PyScene + Submagic):
+├── Cost: ~$74/month
+├── Per-clip: $0.74
+├── Setup time: 20 hours
+└── Development: 40-60 hours total
+```
+**Winner: OpusClip (way cheaper, faster to start)**
+
+---
+
+**At 300 clips/month (ideal OpusClip volume):**
+```
+OpusClip Pro alone:
+├── Cost: $29/month (uses exactly 300-min capacity)
+├── Per-clip: $0.10
+├── Time to clip: ~15 min per 60-min source
+├── Setup: Already done
+└── Perfect for: Consistent daily clipping from 1-2 sources
+
+DIY (Claude + PyScene + Submagic):
+├── Cost: ~$85/month (at batch discounts)
+├── Per-clip: $0.28
+├── Time to clip: ~10 min per 60-min source (faster)
+├── Setup: 40-60 hours one-time
+├── Amortized cost: $85 + ($150/36 months development) = $89/mo
+└── Payback period: Never (OpusClip cheaper)
+```
+**Winner: OpusClip (3x cheaper, no development cost)**
+
+---
+
+**At 600 clips/month:**
+```
+OpusClip Pro (with overages/tiers):
+├── Cost: $100-150/month (multiple tiers)
+├── Per-clip: $0.17-0.25
+├── Time to clip: ~15 min per 60-min source
+├── Capacity stress: Constant
+└── Scaling: Hard (tier limits)
+
+DIY (Claude + PyScene + Submagic):
+├── Cost: ~$120/month (at 600 volume, batch discounts)
+├── Per-clip: $0.20
+├── Time to clip: ~10 min per 60-min source (faster)
+├── Setup: 40-60 hours (paid back in 3-4 months)
+├── Payback period: Reached month 2-3 (operational)
+└── Scaling: Easy (no tier limits)
+```
+**Winner: Hybrid or DIY (lower cost, faster processing)**
+
+---
+
+### REVISED RECOMMENDATION (Critical Update)
+
+```
+Volume < 300 clips/month?
+└─ USE OPUSCLIP PRO ($29/mo)
+   ├─ Per-clip cost: $0.10-0.58
+   ├─ Development: 0 hours
+   ├─ Setup: 5 minutes
+   ├─ Time to first viral clip: 1 week
+   └─ Best for: Rapid validation, learning the market
+
+Volume 300-600 clips/month?
+├─ START WITH OPUSCLIP (learn market)
+├─ BUILD DIY IN PARALLEL (4-6 weeks)
+├─ SWITCH TO DIY at month 2-3 (when payback reached)
+└─ Cost savings after switch: $200-300/year
+
+Volume 600+ clips/month?
+├─ START WITH OPUSCLIP for validation (4-12 weeks)
+├─ BUILD DIY during validation phase
+├─ SWITCH TO DIY full-time (operational cost lower)
+├─ Payback period: 2-4 months (DIY cost + OpusClip savings)
+└─ Year 2+ savings: $300-1,200/year
 ```
 
-**Result:** DIY slightly cheaper, AND faster (6-13 min vs. 25 min per source)
+**Bottom line:**
+- **OpusClip is the right choice for speed-to-market (weeks 1-12)**
+- **DIY becomes valuable after proving market works (month 3+)**
+- **Don't skip OpusClip; use it to learn before building DIY**
 
 ---
 

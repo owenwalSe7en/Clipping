@@ -17,16 +17,28 @@ This venture involves building an **automated clip generation system** to create
 ### Layer 1: Content Generation
 **What we're building:** An automated pipeline that takes long-form video (60-90 minute streams/podcasts) and extracts 10-50 short viral clips per source.
 
-**Current state of art:**
-- OpusClip Pro: $29/month, 93% accuracy, ~25 min processing per 90-min source
-- Alternative: DIY with Whisper + PySceneDetect + Claude API = $0.05/video cost
+**Two paths (you decide):**
 
-**Our approach:** Hybrid system using:
-- Whisper (transcription) - free, 98%+ accuracy
-- PySceneDetect (scene detection) - free, 85-92% accuracy  
-- Claude API (moment analysis) - $0.01-0.05/video
-- FFmpeg (rendering) - free, GPU-accelerated
-- **Result:** 6-13 minutes per 60-min source (60% faster than OpusClip)
+**Path A: OpusClip (Recommended for Weeks 1-4)**
+- Cost: $29/month (includes 300 min/month processing = ~100-300 clips)
+- Setup time: 5 minutes
+- Quality: 93% accuracy, proven
+- Speed: 15-20 min per source (input to publishable clips)
+- Best for: Rapid validation, learning market dynamics
+- Payoff: Get to market in 1 week, prove concept before building DIY
+
+**Path B: DIY with Claude Code (After validation or if 600+ clips/month)**
+- Cost: $50-100/month infrastructure + 40-60 hours development
+- Setup time: 40-60 hours
+- Components: Whisper + PySceneDetect + Claude API + FFmpeg
+- Speed: 10-13 min per source (same/faster than OpusClip)
+- Best for: Scaling to 600+ clips/month where OpusClip tier costs explode
+- Payoff: Break-even in 2-4 months, then $200-300/month savings
+
+**Recommendation:** Start with OpusClip Pro ($29/month) for Weeks 1-4. If earning $150+/week by Week 4, decide whether to:
+- Continue OpusClip (sustainable for 100-300 clips/month)
+- Start building DIY for higher volumes
+- Hybrid both (OpusClip + DIY for 600+ clips/month)
 
 ### Layer 2: Platform Distribution
 **What we're doing:** Publishing clips to 4+ bounty platforms simultaneously while avoiding account bans.
