@@ -51,37 +51,194 @@ Phase 4: OPTIMIZATION (Months 6+)
 
 **Tasks:**
 
-1. **Choose content source (Day 1)**
+1. **Create Email Accounts for Separate Systems (Day 1, 30 min)**
+
+   **DO NOT use your personal email.** Each system (social media, bounty platforms) needs separate emails.
+
+   **Email Structure:**
+   ```
+   SOCIAL MEDIA ACCOUNTS (5 accounts for clipping):
+   ├── clipping-account-1@gmail.com
+   ├── clipping-account-2@gmail.com
+   ├── clipping-account-3@gmail.com
+   ├── clipping-account-4@gmail.com
+   └── clipping-account-5@gmail.com
+
+   BOUNTY PLATFORMS (separate emails):
+   ├── bounty-earnings-1@gmail.com
+   ├── bounty-earnings-2@gmail.com
+   ├── bounty-earnings-3@gmail.com
+   └── bounty-earnings-4@gmail.com
+
+   BUSINESS MANAGEMENT:
+   └── clipping-business@gmail.com (for financial records, invoices)
+   ```
+
+   **How to Create Gmail Accounts:**
+   - Go to https://accounts.google.com/signup
+   - Sign up with naming pattern: clipping-account-1@gmail.com
+   - Verify with phone number (you'll use Google Voice, see below)
+   - Enable 2FA for security
+   - **Time per account:** 3-5 minutes
+
+   **Phone Numbers (Use Google Voice, FREE):**
+   - Go to https://voice.google.com
+   - Sign in with first Gmail account
+   - Claim a free phone number (unlimited per account)
+   - Use these numbers for SMS verification on social media accounts
+   - Pattern:
+     ```
+     clipping-account-1@gmail.com → Google Voice #1
+     clipping-account-2@gmail.com → Google Voice #2
+     clipping-account-3@gmail.com → Google Voice #3
+     clipping-account-4@gmail.com → Google Voice #4
+     clipping-account-5@gmail.com → Google Voice #5
+     ```
+   - **Time per number:** 2-3 minutes
+
+   **Payment Methods (Virtual Cards, Optional but Recommended):**
+   - Sign up: https://privacy.com (free, unlimited virtual cards)
+   - Create 5 virtual cards, one per account:
+     ```
+     clipping-account-1 → Privacy.com Card #1
+     clipping-account-2 → Privacy.com Card #2
+     ... etc
+     ```
+   - Alternative: Use main credit card for all (less secure but faster)
+   - **Cost:** Free with Privacy.com
+   - **Time per card:** 1-2 minutes
+
+   **Spreadsheet to Track:**
+   ```
+   Email | Google Voice # | Virtual Card | Social Accounts | Status
+   -----|---|---|---|---
+   clipping-account-1@gmail.com | +1 555-0001 | Privacy #1 | TikTok/IG/YT | Created
+   clipping-account-2@gmail.com | +1 555-0002 | Privacy #2 | TikTok/IG/YT | Created
+   ... etc
+   ```
+
+2. **Create Social Media Accounts (Day 1-2, 45 min)**
+
+   **DO NOT reuse existing personal accounts.** Create fresh accounts per email.
+
+   **Account Creation Pattern (48 hours apart for bot avoidance):**
+   ```
+   Monday (Day 1): Create Account 1 on all 3 platforms
+   Wednesday (Day 3): Create Account 2 on all 3 platforms
+   Friday (Day 5): Create Account 3 on all 3 platforms
+   ... stagger remaining accounts by 48 hours
+   ```
+
+   **TikTok Account Setup:**
+   - URL: https://www.tiktok.com
+   - Sign up with: clipping-account-1@gmail.com
+   - Phone verification: Use Google Voice #1
+   - Profile: Set to "For You Page" visible
+   - Privacy: Set to public (needed for monetization)
+   - **Time per account:** 5-10 minutes
+
+   **Instagram Reels Account Setup:**
+   - URL: https://www.instagram.com
+   - Sign up with: clipping-account-1@gmail.com
+   - Phone verification: Use Google Voice #1
+   - Profile type: Creator Account (not personal)
+   - Privacy: Public
+   - **Time per account:** 5-10 minutes
+
+   **YouTube Shorts Account Setup:**
+   - URL: https://www.youtube.com
+   - Sign up with: clipping-account-1@gmail.com
+   - Create channel with name: "Clipping Account 1" (descriptive)
+   - Profile: Public, Creator account
+   - **Time per account:** 5-10 minutes
+
+   **Account Warm-Up (30 days required, see details in bot avoidance section):**
+   - Once created, follow 10-20 creators in gaming/clipping niche
+   - Like 20-30 posts (spread over 7 days, not all at once)
+   - Comment naturally on 5-10 posts
+   - Use app for 10-15 minutes total per day
+   - **NO POSTING YET** for 30 days
+
+3. **Create Bounty Platform Accounts (Day 1-2, 30 min)**
+
+   **Use separate emails from social media accounts.**
+
+   **Content Rewards Setup:**
+   - URL: https://contentrewards.com
+   - Sign up with: bounty-earnings-1@gmail.com
+   - Verify email + phone
+   - Add payment method (for receiving bounties)
+   - Set profile public
+   - **Time:** 5-10 minutes
+
+   **Whop Setup:**
+   - URL: https://whop.com
+   - Sign up with: bounty-earnings-1@gmail.com
+   - Create creator profile
+   - Enable monetization
+   - Connect payment account
+   - **Time:** 5-10 minutes
+
+   **Vyro Setup:**
+   - URL: https://vyro.io
+   - Sign up with: bounty-earnings-2@gmail.com (or same as Whop)
+   - Complete profile
+   - Enable bounties
+   - Add payment method
+   - **Time:** 5-10 minutes
+
+   **Clipify Setup:**
+   - URL: https://clipify.io
+   - Sign up with: bounty-earnings-2@gmail.com
+   - Complete KYC (identity verification, may take 24-48 hours)
+   - Add payment account
+   - **Time:** 10-15 minutes (+ 24-48 hr approval)
+
+   **Spreadsheet to Track:**
+   ```
+   Platform | Email | Username | Password Manager | Status | Bounty Account | Linked Social
+   -----|---|---|---|---|---|---
+   Content Rewards | bounty-earnings-1@gmail.com | clipping-user-1 | Saved | Active | Bank acct | Not yet
+   Whop | bounty-earnings-1@gmail.com | clipping-user-1 | Saved | Active | PayPal | Not yet
+   Vyro | bounty-earnings-2@gmail.com | clipping-user-2 | Saved | Active | Stripe | Not yet
+   Clipify | bounty-earnings-2@gmail.com | clipping-user-2 | Saved | Pending KYC | Bank acct | Not yet
+   ```
+
+4. **Choose content source (Day 2)**
    - Option A: Large Twitch streamer (daily streams, built-in audience)
    - Option B: Podcast (longer duration, more content)
    - Option C: YouTuber with weekly uploads
    - Criteria: Consistent schedule (daily or weekly), engaging content, 10K+ existing audience
    - **Decision:** Pick 1; commit to 6+ weeks of content
+   - **Recommended:** BOGGLES or HIVISE (see CREATOR_ANALYSIS_REPORT.md)
 
-2. **Set up accounts (Day 1)**
-   - Create accounts on: Content Rewards, Whop, Vyro, Clipify
-   - Warm up each account (follow 5-10 creators, like some posts)
-   - Verify payment methods work
-
-3. **Subscribe to OpusClip Pro & Create First Clips (Days 2-3)**
+5. **Subscribe to OpusClip Pro & Create First Clips (Days 3-4)**
    - Sign up: OpusClip Pro ($29/month, 3,600 annual credits)
+   - Connect Twitch/YouTube account (your personal account, not clipping accounts)
+   - Set preferences (clip length, aspect ratio, quality)
    - Download: One 60-90 min VOD from your content source
    - Generate: Let OpusClip auto-generate 15-30 clips
    - Review: Select best 10-15 clips from OpusClip's output
    - **Time investment:** 2 hours total
 
-4. **Publish test clips (Day 4)**
+6. **Publish test clips (Day 5)**
    - Upload 10-15 clips to all 4 bounty platforms
+   - Upload same clips to social media Account 1 (after 30-day warm-up)
    - Track views daily in spreadsheet
 
-5. **Analyze results (Day 5-7)**
+7. **Analyze results (Day 6-7)**
    - Which platform got most views?
    - Which clip types worked best?
    - Estimated viral rate?
    - **Key metric:** Did any clip reach 50K+ views in 7 days?
 
 **Success Criteria:**
-- ✅ Published 10-15 clips with OpusClip
+- ✅ Created 5 email accounts
+- ✅ Created Google Voice numbers for each
+- ✅ Created social media accounts (TikTok, Instagram, YouTube) on all 5 emails
+- ✅ Created bounty platform accounts (Content Rewards, Whop, Vyro, Clipify)
+- ✅ Accounts in 30-day warm-up period
+- ✅ Published 10-15 clips with OpusClip to bounty platforms
 - ✅ At least 1 clip reaches 10K+ views
 - ✅ Identified 2-3 content types that work
 - ✅ Estimated earnings: $50-200 from bounties
