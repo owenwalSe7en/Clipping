@@ -1,3 +1,7 @@
+---
+description: "Generate platform-specific video captions from a transcript"
+---
+
 # /caption — Generate platform-specific video captions
 
 ## When to use
