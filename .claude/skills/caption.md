@@ -1,5 +1,6 @@
 ---
 description: "Generate platform-specific video captions from a transcript"
+user_invocable: true
 ---
 
 # /caption — Generate platform-specific video captions
