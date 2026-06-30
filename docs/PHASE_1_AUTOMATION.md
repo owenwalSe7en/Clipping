@@ -2,59 +2,105 @@
 
 ## Overview
 
-**Goal:** Automate clip discovery, generation, and distribution using OpusClip while avoiding platform bans.
+**Goal:** Build themed social media channels (mindset/self-improvement) combining curated content for audience growth with OpusClip-generated campaign clips for monetization via bounty platforms. Establish the flywheel: free curation builds audience → audience boosts campaign clip performance → campaign earnings fund more content.
 
 **Timeline:** Weeks 1-4 (validation phase)
 
 **Tools:**
-- OpusClip Pro ($29/month) - clip generation
+- OpusClip Pro ($29/month) - campaign clip generation
+- Content curator (manual or automated) - curated clip organization
+- Themed YouTube/TikTok/Instagram channel - audience hub
 - ShortSync or Repurpose.io - multi-platform publishing
-- Claude Code - orchestration & monitoring
-- Custom dashboard - earnings tracking
+- Claude Code - orchestration, curation logic, earnings tracking
+- Custom dashboard - earnings (campaign) + audience (curated) metrics
 
 ---
 
-## Architecture: OpusClip Phase 1
+## Architecture: Hybrid Phase 1 (Curated + Campaign)
 
 ```
-Content Source
+TWO CONTENT STREAMS (Running in Parallel):
+
+STREAM 1: CAMPAIGN CONTENT (Monetization)
+────────────────────────────────────
+Campaign Source (e.g., BOGGLES Twitch stream)
   ↓
 ├─ Twitch VOD download (yt-dlp)
 ├─ YouTube/Podcast URL
 └─ Local video file
   ↓
 OpusClip Pro
-  ├─ Auto-generate 20-50 clips
+  ├─ Auto-generate 20-50 campaign clips
   ├─ Rate: 300 minutes/month allocation
   └─ Output: MP4 files with metadata
   ↓
-Claude Code QA Gate
+Claude Code QA Gate (Campaign)
   ├─ Filter bottom 13% quality
   ├─ Check clip duration (15-60s)
   ├─ Verify aspect ratio
   └─ Flag for manual review if uncertain
   ↓
-Multi-Platform Publisher
+Multi-Platform Publisher (Campaign)
+  ├─ Route to: Themed channel + Bounty platforms
   ├─ ShortSync (simultaneous posting)
-  ├─ Manual Rumble upload (5 min)
   └─ Track posting success rate
   ↓
-Monitoring Dashboard
-  ├─ Real-time view counts
-  ├─ Earnings per platform
-  ├─ Account health status
-  └─ Copyright claim alerts
-  ↓
-Bounty Platforms
+Bounty Platforms (Campaign Revenue)
   ├─ Content Rewards
   ├─ Whop
   ├─ Vyro
   └─ Clipify
+
+STREAM 2: CURATED CONTENT (Audience Building)
+────────────────────────────────────
+Free Clip Sources (Theme-relevant)
+  ├─ YouTube "best moments" libraries
+  ├─ Podcast clip feeds (public)
+  ├─ Esports/gaming highlights
+  ├─ Self-improvement creators
+  └─ Finance/entrepreneurship clips
   ↓
-Earnings & Analytics
-  ├─ Daily earnings tracking
-  ├─ Platform performance
-  └─ Content type analysis
+Claude Code Content Curator
+  ├─ Search/identify theme-relevant clips
+  ├─ Download & organize by sub-theme
+  ├─ Add proper credits/attribution
+  └─ Queue for posting schedule
+  ↓
+Multi-Platform Publisher (Curated)
+  ├─ Route to: Themed channel primarily
+  ├─ Mix with campaign clips for reach
+  └─ Stagger posting for consistency
+  ↓
+Themed Channel (Audience Growth)
+  ├─ YouTube channel (mindset/self-improvement)
+  ├─ TikTok account
+  └─ Instagram Reels account
+  ↓
+Follower Analytics
+  ├─ Follower growth rate
+  ├─ Engagement per post (curated)
+  ├─ Audience theme preferences
+  └─ Best-performing sub-niches
+
+MONITORING DASHBOARD (Hybrid)
+────────────────────────────────────
+Earnings & Revenue (Campaign Only)
+  ├─ Real-time view counts (campaign)
+  ├─ Earnings per platform (bounty)
+  ├─ Campaign clip performance
+  └─ Copyright claim alerts
+
+Audience & Engagement (Curated)
+  ├─ Follower growth tracking
+  ├─ Engagement rate by sub-theme
+  ├─ Curated content resonance
+  └─ Theme health metrics
+
+Flywheel Metrics
+  ├─ Correlation: Followers vs. campaign clip performance
+  ├─ CPM trend: Are campaign clips earning more as audience grows?
+  ├─ Content mix optimization: % curated vs. campaign
+  └─ Account health status (ban risk)
 ```
 
 ---

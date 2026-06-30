@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Logs — Clip Prescreener{% endblock %}
+
+{% block content %}
+<div class="bg-card rounded-lg p-6 border border-gray-700">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-semibold text-accent">System Logs</h2>
+    <div class="flex gap-2">
+      <button onclick="loadLogs('all')" id="btn-all"
+        class="px-3 py-1 text-sm rounded bg-accent text-black font-medium">All</button>
+      <button onclick="loadLogs('errors')" id="btn-errors"
+        class="px-3 py-1 text-sm rounded bg-gray-700 text-gray-300">Errors Only</button>
+      <button onclick="loadLogs(currentType)" id="btn-refresh"
+        class="px-3 py-1 text-sm rounded bg-gray-700 text-gray-300 hover:bg-gray-600">Refresh</button>
+    </div>
+  </div>
+
+  <div id="log-container" class="bg-surface rounded border border-gray-700 p-4 font-mono text-xs overflow-x-auto max-h-[70vh] overflow-y-auto">
+    <div class="text-gray-500">Loading...</div>
+  </div>
+
+  <div class="mt-2 text-xs text-gray-500">
+    <span id="log-count">0</span> entries &middot; Logs are stored in <code>prescreener/logs/</code> with automatic rotation at 5 MB
+  </div>
+</div>
+
+<script>
+let currentType = 'all';
+
+function loadLogs(type) {
+  currentType = type;
+
+  document.getElementById('btn-all').className = type === 'all'
+    ? 'px-3 py-1 text-sm rounded bg-accent text-black font-medium'
+    : 'px-3 py-1 text-sm rounded bg-gray-700 text-gray-300';
+  document.getElementById('btn-errors').className = type === 'errors'
+    ? 'px-3 py-1 text-sm rounded bg-accent text-black font-medium'
+    : 'px-3 py-1 text-sm rounded bg-gray-700 text-gray-300';
+
+  fetch(`/api/logs?type=${type}&lines=200`)
+    .then(r => r.json())
+    .then(data => {
+      const container = document.getElementById('log-container');
+      document.getElementById('log-count').textContent = data.total;
+
+      if (data.entries.length === 0) {
+        container.innerHTML = '<div class="text-gray-500">No log entries yet.</div>';
+        return;
+      }
+
+      container.innerHTML = data.entries.map(e => {
+        let color = 'text-gray-400';
+        if (e.level === 'ERROR') color = 'text-red-400';
+        else if (e.level === 'WARNING') color = 'text-yellow-400';
+        else if (e.level === 'DEBUG') color = 'text-gray-600';
+        return `<div class="${color} leading-5 whitespace-pre-wrap">${escapeHtml(e.text)}</div>`;
+      }).join('');
+
+      container.scrollTop = container.scrollHeight;
+    })
+    .catch(() => {
+      document.getElementById('log-container').innerHTML =
+        '<div class="text-red-400">Failed to load logs.</div>';
+    });
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+loadLogs('all');
+</script>
+{% endblock %}

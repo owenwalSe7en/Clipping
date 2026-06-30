@@ -6,31 +6,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Clipping Venture:** A two-phase automated system for generating and monetizing short-form video clips from long-form content (Twitch streams, podcasts, YouTube).
+**Clipping Venture:** Build themed social media channels (mindset/self-improvement for young men 18-30) that combine **curated content for audience building** with **paid campaign clips for monetization**—a flywheel where followers boost campaign performance.
 
-**Phase 1 (Weeks 1-4):** OpusClip-based validation with manual publishing ($29/month OpusClip subscription)
+**Core Strategy (Hybrid Model):**
+- **Curated Content** (50-60% of volume): Free clips from creators, audience-building focused
+- **Campaign Content** (40-50% of volume): Paid bounty platform clips, monetization-focused
+- **Payoff:** Engaged followers from curated content → higher view counts on campaign clips → better bounty earnings → reinvest in more content
+
+**Phase 1 (Weeks 1-4):** OpusClip-based validation with manual publishing + theme channel setup ($29/month OpusClip subscription)
 
 **Phase 2 (Weeks 5-8+, optional):** DIY Claude Code-based clip generation system (if Phase 1 earnings exceed $300+/week)
 
-**Target Markets:** Video bounty platforms (Content Rewards, Whop, Vyro, Clipify) paying $2-10 per 1K views
+**Target Markets:** Themed YouTube/TikTok/Instagram channels (audience-first) + bounty platforms (Content Rewards, Whop, Vyro, Clipify) paying $2-10 per 1K views on campaign content
+
+**Sub-Niches:** Entrepreneurship, fitness/discipline, podcast wisdom, gaming competition, finance mindset, confidence/social skills
 
 ---
 
-## Documentation Architecture
+## Documentation
 
-All strategy and execution documentation lives in `MGMT_docs/`. These are **not code files**—they are specification documents for the venture itself.
+All docs live in `docs/`. No subfolders, no indexes — just the docs themselves.
 
 ```
-MGMT_docs/
-├─ YOUR_STRATEGY.md                    # Your exact implementation path (start here)
-├─ PHASE_1_AUTOMATION_BLUEPRINT.md     # Complete Phase 1 setup & Python automation code
-├─ PHASE_2_OPUSCLIP_REPLACEMENT.md     # Optional DIY replacement (Whisper + Claude API + FFmpeg)
-├─ CREATOR_ANALYSIS_REPORT.md          # Top 10+ vetted creators to clip from (BOGGLES, HIVISE recommended)
-├─ 01_IMPLEMENTATION_STEPS.md          # Week-by-week detailed roadmap
-├─ 02_BOT_AVOIDANCE_PLAYBOOK.md        # Platform rate limits, posting patterns, ban prevention
-├─ CRITICAL_UPDATE_OPUSCLIP_PRICING.md # Pricing analysis ($0.10/clip at 300 clips/month)
-├─ INDEX.md                            # Full navigation map
-└─ _ARCHIVE/                           # Legacy documents (reference only)
+docs/
+├─ STRATEGY.md              # Master plan — start here
+├─ IMPLEMENTATION.md         # Week-by-week execution roadmap
+├─ PHASE_1_AUTOMATION.md     # OpusClip automation scripts (Python)
+├─ PHASE_2_DIY.md            # Optional DIY system (Whisper + Claude + FFmpeg)
+├─ BOT_AVOIDANCE.md          # Platform rate limits & ban prevention
+├─ ACCOUNT_SETUP.md          # Google Workspace & multi-account structure
+├─ BOUNTY_PLATFORMS.md       # Content Rewards, Whop, Vyro, Clipify guide
+├─ CREATORS.md               # Vetted campaign creators (BOGGLES, HIVISE, etc.)
+├─ CURATED_SOURCES.md        # Channels to monitor for curated content
+├─ SOCIAL_MEDIA.md           # Handles, bios, visual identity, content pillars
+└─ MONITORING.md             # Content monitoring automation (Hermes, Claude Code /schedule)
 ```
 
 ---
@@ -39,15 +48,16 @@ MGMT_docs/
 
 Claude Code is used for **automation scripting and orchestration** during both phases:
 
-### Phase 1: OpusClip Integration Scripts
-The `PHASE_1_AUTOMATION_BLUEPRINT.md` includes 4 production-ready Python scripts (copy-paste ready):
+### Phase 1: OpusClip + Hybrid Content Strategy
+The `PHASE_1_AUTOMATION_BLUEPRINT.md` includes 5 production-ready Python scripts (copy-paste ready):
 
-1. **OpusClip Orchestrator** - Download VODs, submit to OpusClip, retrieve generated clips
-2. **Multi-Platform Publisher** - Publish clips to ShortSync, Rumble, and bounty platforms
-3. **Earnings Aggregator** - Track views and earnings across platforms in real-time
-4. **Bot Avoidance Safety Gates** - Enforce posting limits and humanized delays per platform
+1. **Content Curator** - Select and organize curated clips from multiple creators (audience-building content)
+2. **OpusClip Orchestrator** - Download VODs, submit to OpusClip, retrieve generated campaign clips
+3. **Hybrid Publisher** - Publish curated and campaign clips to themed channels (YouTube/TikTok/Instagram) + bounty platforms
+4. **Earnings Aggregator** - Track views and earnings across platforms; separate curated (audience metric) from campaign (revenue metric)
+5. **Bot Avoidance Safety Gates** - Enforce posting limits and humanized delays per platform, account for higher volume (curated + campaign)
 
-**Claude Code's Role:** Write these orchestration scripts, adapt them per creator, monitor execution
+**Claude Code's Role:** Write these orchestration scripts, manage theme-based curation logic, adapt per niche, monitor execution and audience growth
 
 ### Phase 2: DIY Clip Generation (Optional)
 If Phase 1 succeeds, `PHASE_2_OPUSCLIP_REPLACEMENT.md` provides complete DIY architecture:
@@ -64,12 +74,16 @@ If Phase 1 succeeds, `PHASE_2_OPUSCLIP_REPLACEMENT.md` provides complete DIY arc
 
 ## Critical Numbers & Economics
 
-### Phase 1: OpusClip (Weeks 1-4)
+### Phase 1: OpusClip + Hybrid Content (Weeks 1-4)
 - **Cost:** $29/month OpusClip + $15-35/month distribution tools
 - **Time:** 2-3 hours/day for 4 weeks
-- **Target Volume:** 50-70 clips published
-- **Target Revenue:** $200-1,000 (bounty payouts)
-- **Success Metric:** $150+/week earnings by Week 4
+- **Target Volume:** 100-140 clips published (50-70 curated + 50-70 campaign)
+- **Target Revenue:** $200-1,000 (bounty payouts from campaign content only)
+- **Target Audience:** 500-2,000 followers on themed channel (from curated content)
+- **Success Metrics:** 
+  - $150+/week earnings from campaign bounties by Week 4
+  - 1,000+ followers on channel by Week 4
+  - Campaign clips averaging 30-50% better views than Week 1 (audience flywheel effect)
 
 ### Phase 2: DIY (Optional, Weeks 5-8+)
 - **Cost:** $60-170/month (infrastructure + Claude API)
@@ -100,7 +114,7 @@ Rumble:     No rate limits documented, but manual upload (no official API)
 
 ## Recommended Starting Creator
 
-**BOGGLES** (from CREATOR_ANALYSIS_REPORT.md)
+**BOGGLES** (from `docs/CREATORS.md`)
 - Platform: Twitch
 - Followers: 44,961
 - Growth: 45% month-over-month (fastest growing)
@@ -114,14 +128,17 @@ Rumble:     No rate limits documented, but manual upload (no official API)
 
 ## Week 1 Execution Checklist
 
-Reference `PHASE_1_AUTOMATION_BLUEPRINT.md` for full details. Claude Code involvement:
+Reference `docs/PHASE_1_AUTOMATION.md` for full details. Claude Code involvement:
 
-- [ ] Day 1-2: Infrastructure setup (manual—OpusClip, bounty platforms, ShortSync/Repurpose.io)
+- [ ] Day 1-2: Infrastructure setup (manual—OpusClip, bounty platforms, ShortSync/Repurpose.io, theme channel creation)
+- [ ] Day 2-3: Curate 10-15 free clips from creators matching mindset/self-improvement theme
 - [ ] Day 3-4: Download VODs with `yt-dlp`, submit to OpusClip (manual for now)
-- [ ] Day 5-7: Publish 10-15 clips to all platforms; establish monitoring dashboard
+- [ ] Day 5-7: Publish 20-30 clips total (10-15 curated + 10-15 campaign) to themed channel + bounty platforms
 - **Claude Code Tasks:**
   - Write `vod_downloader.py` (yt-dlp wrapper)
-  - Write `earnings_tracker.py` (Notion API or spreadsheet automation)
+  - Write `content_curator.py` (identify and organize theme-relevant clips from multiple sources)
+  - Write `hybrid_publisher.py` (route curated vs campaign clips to appropriate platforms)
+  - Write `engagement_tracker.py` (track followers, views by content type, earnings by content type)
   - Create bot safety gate checks in publishing script
 
 ---
@@ -141,12 +158,12 @@ These are external services, **not managed by Claude Code:**
 
 ---
 
-## File Organization Notes
+## File Organization
 
-- **No source code in this project yet.** Everything is documentation-driven strategy.
-- **Automation code is examples within docs.** When you write automation, it will be new Python files (e.g., `orchestrator.py`, `publisher.py`, `monitor.py`).
-- **All economics/strategy is in MGMT_docs/.** Don't duplicate or re-document—reference existing files.
-- **_ARCHIVE folder:** Legacy docs kept for reference; not active execution.
+- **`prescreener/`** — Self-contained Flask app (Whisper + Claude moment analysis). Run with `python -m prescreener` from project root. Has its own `requirements.txt`, `.env`, and `__main__.py`. Nothing leaks into the project root.
+- **All strategy/planning lives in `docs/`.** Don't duplicate — reference existing files.
+- **`Content/`** holds actual clip files organized by creator.
+- **Future automation scripts** go in their own directories, not the project root.
 
 ---
 
@@ -158,18 +175,27 @@ If earnings $150-$300/week: Continue Phase 1, optionally start Phase 2
 If earnings $300+/week: Strongly consider Phase 2 DIY development
 
 ### Phase 2 Go/No-Go (Week 5)
-Only proceed if Phase 1 is earning $300+/week. See `PHASE_2_OPUSCLIP_REPLACEMENT.md` for full DIY stack.
+Only proceed if Phase 1 is earning $300+/week. See `docs/PHASE_2_DIY.md` for full DIY stack.
 
 ---
 
 ## Key References
 
-- **Strategy:** `MGMT_docs/YOUR_STRATEGY.md`
-- **Phase 1 Details:** `MGMT_docs/PHASE_1_AUTOMATION_BLUEPRINT.md` (includes Python code templates)
-- **Phase 2 Details:** `MGMT_docs/PHASE_2_OPUSCLIP_REPLACEMENT.md` (if needed)
-- **Safety:** `MGMT_docs/02_BOT_AVOIDANCE_PLAYBOOK.md` (platform limits & posting patterns)
-- **Creators:** `MGMT_docs/CREATOR_ANALYSIS_REPORT.md` (vetted list; BOGGLES/HIVISE first)
-- **Navigation:** `MGMT_docs/INDEX.md`
+- **Strategy:** `docs/STRATEGY.md`
+- **Phase 1:** `docs/PHASE_1_AUTOMATION.md` (includes Python code templates)
+- **Phase 2:** `docs/PHASE_2_DIY.md` (if needed)
+- **Safety:** `docs/BOT_AVOIDANCE.md` (platform limits & posting patterns)
+- **Campaign Creators:** `docs/CREATORS.md` (BOGGLES/HIVISE first)
+- **Curated Sources:** `docs/CURATED_SOURCES.md` (Jocko, Huberman, Lex, GaryVee, etc.)
+- **Branding:** `docs/SOCIAL_MEDIA.md` (handles, bios, visual identity)
+- **Monitoring:** `docs/MONITORING.md` (Hermes agent, Claude Code /schedule)
+
+---
+
+## Account Infrastructure
+
+- **Google Workspace** on custom domain for email accounts (replaces multi-Gmail approach)
+- **YouTube Shorts deferred to Month 2** — Workspace trial accounts can't access YouTube until $30+ payment processed or 30 days elapsed. Not worth the extra cost in Month 1; focus distribution on TikTok, Instagram, and bounty platforms instead.
 
 ---
 
@@ -179,5 +205,8 @@ Only proceed if Phase 1 is earning $300+/week. See `PHASE_2_OPUSCLIP_REPLACEMENT
 - [x] Phase 2 DIY architecture blueprinted (Whisper → Claude → FFmpeg)
 - [x] Creator analysis complete (BOGGLES/HIVISE recommended)
 - [x] Bot avoidance playbook documented
-- [ ] Week 1 execution begins (choose creator, subscribe OpusClip)
+- [x] Google Workspace account created for multi-account email management
+- [x] **Hybrid content strategy pivoted** (curated + campaign flywheel model)
+- [x] Theme identified: Mindset/self-improvement for young men (18-30)
+- [ ] Week 1 execution begins (choose creator, curate initial content, subscribe OpusClip)
 - [ ] Automation code written as Phase 1 progresses

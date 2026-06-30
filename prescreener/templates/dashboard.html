@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Analyze — Clip Prescreener{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- Upload Form -->
+  <div class="bg-card rounded-lg p-6 border border-gray-700">
+    <h2 class="text-lg font-semibold text-accent mb-4">New Analysis</h2>
+
+    <div class="mb-4">
+      <div class="flex gap-2 mb-4">
+        <button id="tab-url" onclick="switchTab('url')"
+          class="tab-btn px-4 py-2 rounded text-sm font-medium bg-accent text-black">YouTube URL</button>
+        <button id="tab-file" onclick="switchTab('file')"
+          class="tab-btn px-4 py-2 rounded text-sm font-medium bg-gray-700 text-gray-300">File Upload</button>
+      </div>
+
+      <!-- YouTube URL form -->
+      <form id="form-url" action="/analyze" method="POST" class="">
+        <input type="hidden" name="source_type" value="youtube_url">
+        <label class="block text-sm text-gray-400 mb-1">YouTube / Video URL</label>
+        <input type="url" name="url" placeholder="https://www.youtube.com/watch?v=..."
+          class="w-full bg-surface border border-gray-600 rounded px-3 py-2 text-gray-200 focus:border-accent focus:outline-none mb-3">
+        <div class="text-xs text-gray-500 mb-4">Supports YouTube, Twitch VODs, and most video platforms via yt-dlp</div>
+        <button type="submit"
+          class="w-full bg-accent text-black font-semibold py-2 rounded hover:bg-amber-400 transition">
+          Analyze Video
+        </button>
+      </form>
+
+      <!-- File Upload form -->
+      <form id="form-file" action="/analyze" method="POST" enctype="multipart/form-data" class="hidden">
+        <input type="hidden" name="source_type" value="file_upload">
+        <label class="block text-sm text-gray-400 mb-1">Audio or Video File</label>
+        <input type="file" name="file" accept=".mp3,.mp4,.wav,.m4a,.webm,.mkv,.mov"
+          class="w-full bg-surface border border-gray-600 rounded px-3 py-2 text-gray-200 file:mr-3 file:bg-gray-700 file:text-gray-300 file:border-0 file:rounded file:px-3 file:py-1 mb-3">
+        <div class="text-xs text-gray-500 mb-4">Max 2 GB. Accepts MP3, MP4, WAV, M4A, WebM, MKV, MOV</div>
+        <button type="submit"
+          class="w-full bg-accent text-black font-semibold py-2 rounded hover:bg-amber-400 transition">
+          Analyze File
+        </button>
+      </form>
+    </div>
+
+    <!-- Cost estimate -->
+    <div class="mt-4 p-3 bg-surface rounded border border-gray-700">
+      <div class="text-xs text-gray-400 mb-1">Estimated cost per analysis</div>
+      <div class="grid grid-cols-3 gap-2 text-center text-xs">
+        <div>
+          <div class="text-gray-500">10 min</div>
+          <div class="text-accent font-mono">$0.08</div>
+        </div>
+        <div>
+          <div class="text-gray-500">30 min</div>
+          <div class="text-accent font-mono">$0.23</div>
+        </div>
+        <div>
+          <div class="text-gray-500">1 hour</div>
+          <div class="text-accent font-mono">$0.44</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Analyses -->
+  <div class="bg-card rounded-lg p-6 border border-gray-700">
+    <h2 class="text-lg font-semibold text-accent mb-4">Recent Analyses</h2>
+    {% if analyses %}
+    <div class="space-y-3">
+      {% for a in analyses %}
+      <a href="/results/{{ a.id }}"
+        class="block p-3 bg-surface rounded border border-gray-700 hover:border-accent transition">
+        <div class="flex justify-between items-start">
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium truncate">{{ a.source_title }}</div>
+            <div class="text-xs text-gray-500 mt-1">
+              {{ a.created_at.strftime('%b %d, %H:%M') }}
+              {% if a.duration_seconds %}
+                &middot; {{ (a.duration_seconds / 60) | round(0) | int }}m
+              {% endif %}
+              {% if a.moments | length > 0 %}
+                &middot; {{ a.moments | length }} moments
+              {% endif %}
+            </div>
+          </div>
+          <div class="ml-2">
+            {% if a.status == 'complete' %}
+              <span class="text-xs px-2 py-1 rounded bg-green-900/50 text-green-400">Done</span>
+            {% elif a.status == 'failed' %}
+              <span class="text-xs px-2 py-1 rounded bg-red-900/50 text-red-400">Failed</span>
+            {% else %}
+              <span class="text-xs px-2 py-1 rounded bg-amber-900/50 text-amber-400">{{ a.status | title }}</span>
+            {% endif %}
+          </div>
+        </div>
+        {% if a.total_cost > 0 %}
+        <div class="text-xs text-gray-500 mt-1">${{ "%.4f" | format(a.total_cost) }}</div>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-gray-500 text-sm">No analyses yet. Submit a video to get started.</div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.getElementById('form-url').classList.toggle('hidden', tab !== 'url');
+  document.getElementById('form-file').classList.toggle('hidden', tab !== 'file');
+  document.getElementById('tab-url').className = tab === 'url'
+    ? 'tab-btn px-4 py-2 rounded text-sm font-medium bg-accent text-black'
+    : 'tab-btn px-4 py-2 rounded text-sm font-medium bg-gray-700 text-gray-300';
+  document.getElementById('tab-file').className = tab === 'file'
+    ? 'tab-btn px-4 py-2 rounded text-sm font-medium bg-accent text-black'
+    : 'tab-btn px-4 py-2 rounded text-sm font-medium bg-gray-700 text-gray-300';
+}
+</script>
+{% endblock %}

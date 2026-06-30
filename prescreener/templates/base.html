@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Clip Prescreener{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: '#0f172a',
+            card: '#1e293b',
+            accent: '#f59e0b',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body class="bg-surface text-gray-200 min-h-screen">
+  <nav class="border-b border-gray-700 bg-card">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-6">
+      <a href="/" class="text-accent font-bold text-lg tracking-tight">Clip Prescreener</a>
+      <div class="flex gap-4 text-sm">
+        <a href="/" class="hover:text-accent {% if request.path == '/' %}text-accent{% endif %}">Analyze</a>
+        <a href="/costs" class="hover:text-accent {% if request.path == '/costs' %}text-accent{% endif %}">Costs</a>
+        <a href="/logs" class="hover:text-accent {% if request.path == '/logs' %}text-accent{% endif %}">Logs</a>
+      </div>
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="max-w-6xl mx-auto px-4 pt-4">
+        {% for category, message in messages %}
+          <div class="p-3 rounded text-sm mb-2
+            {% if category == 'error' %}bg-red-900/50 text-red-300
+            {% else %}bg-green-900/50 text-green-300{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main class="max-w-6xl mx-auto px-4 py-6">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
