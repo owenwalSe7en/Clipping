@@ -1,6 +1,8 @@
 import json
 import logging
+import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 from flask import current_app
@@ -8,7 +10,20 @@ from flask import current_app
 log = logging.getLogger("prescreener.downloader")
 
 NODE_PATH = "/home/agent99/.local/share/mise/installs/node/25.1.0/bin/node"
-YT_DLP_BASE = ["yt-dlp", "--no-playlist"]
+
+def _find_yt_dlp():
+    venv_bin = Path(sys.executable).parent / "yt-dlp"
+    if venv_bin.exists():
+        return str(venv_bin)
+    found = shutil.which("yt-dlp")
+    if found:
+        return found
+    raise FileNotFoundError(
+        "yt-dlp not found. Install it with: pip install yt-dlp"
+    )
+
+YT_DLP_PATH = _find_yt_dlp()
+YT_DLP_BASE = [YT_DLP_PATH, "--no-playlist"]
 
 
 def _yt_dlp_flags():

@@ -79,8 +79,9 @@ Choose the template that best fits the clip's energy. You may blend templates.
 - Use short sentences and line breaks
 - Reference real people by name (not generic advice)
 - Create slight tension or challenge
-- Be specific — numbers, timelines, actual examples
+- Be specific: numbers, timelines, actual examples
 - Max 3-4 emojis per caption, used for emphasis not decoration
+- Write like a real person posting from their phone, not a content engine
 
 **DON'T:**
 - Use cliches without context ("never give up," "you got this," "believe in yourself")
@@ -88,6 +89,9 @@ Choose the template that best fits the clip's energy. You may blend templates.
 - Ask rhetorical questions without a real discussion prompt
 - Post motivation without connecting it to action or principle
 - Overuse emojis
+- Use em dashes (--). Use periods, commas, colons, or line breaks instead
+- Use AI-sounding filler: "delve," "landscape," "navigate," "unleash," "elevate," "foster," "harness," "cutting-edge," "game-changer," "deep dive," "unpack," "at the end of the day," "it's worth noting," "in today's world," "let's be honest," "here's the thing"
+- Use overly polished or structured phrasing that sounds generated. If a sentence reads like a LinkedIn post from a brand account, rewrite it
 
 ### Step 4: Output format
 
